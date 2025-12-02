@@ -80,7 +80,10 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "package": "vsce package",
-    "deploy": "vsce publish"
+    "deploy": "vsce publish",
+    "release:patch": "npm version patch -m 'chore: release v%s'",
+    "release:minor": "npm version minor -m 'chore: release v%s'",
+    "release:major": "npm version major -m 'chore: release v%s'"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",
