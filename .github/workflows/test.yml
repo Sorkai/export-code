@@ -15,6 +15,7 @@ jobs:
         vscode_version: [ '1.60.0', 'stable' ]
         node_version: [ '20' ]
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -29,8 +30,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # 可选：避免每次都重新下载 VS Code 测试包，加速 CI
+      - name: Cache VS Code test downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.vscode-test
+          key: vscode-test-${{ runner.os }}-${{ matrix.vscode_version }}
+
+      # 安装 Xvfb 及常见 Electron 依赖库，确保 VS Code 能在 CI 启动
+      - name: Install Xvfb and deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0 libnss3 libxss1 libasound2 libxtst6 libgbm1
+
+      # 使用 Xvfb 运行测试；runTest.ts 已支持从环境变量读取 VS Code 版本
       - name: Run integration tests (VS Code ${{ matrix.vscode_version }})
         env:
           VSCODE_TEST_VERSION: ${{ matrix.vscode_version }}
+          ELECTRON_ENABLE_LOGGING: '1'
+          ELECTRON_ENABLE_STACK_DUMPING: '1'
         run: |
-          npm test
+          xvfb-run -a npm test
