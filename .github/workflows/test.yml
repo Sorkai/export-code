@@ -1,6 +1,4 @@
 name: Extension Tests
-permissions:
-  contents: read
 
 on:
   push:
@@ -8,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
