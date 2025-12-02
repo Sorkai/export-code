@@ -25,8 +25,22 @@ jobs:
         env:
           NODE_OPTIONS: --no-experimental-fetch
 
+      - name: Run linter
+        run: npm run lint
+
       - name: Compile TypeScript
         run: npm run compile
+
+      - name: Install Xvfb and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0 libnss3 libxss1 libxtst6 libgbm1
+          sudo apt-get install -y libasound2 || sudo apt-get install -y libasound2t64
+
+      - name: Run tests
+        run: xvfb-run -a npm test
+        env:
+          VSCODE_TEST_VERSION: stable
 
       - name: Package extension
         run: npm run package

@@ -43,7 +43,7 @@
 - 📦 **核心依赖升级**
   - TypeScript: 5.3.3 → 5.9.3
   - @types/node: 16.x → 24.10.1
-  - @types/vscode: 1.85.0 → 1.106.1
+  - @types/vscode: 1.60.0 → 1.80.0
   - glob: 旧版 → 10.5.0 (重构为现代 API)
   - ESLint: v8 → v9 (Flat Config)
 

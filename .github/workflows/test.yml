@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        vscode_version: [ '1.60.0', 'stable' ]
+        vscode_version: [ '1.80.0', 'stable' ]
         node_version: [ '20' ]
     runs-on: ubuntu-latest
     timeout-minutes: 15
