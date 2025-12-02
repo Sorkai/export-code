@@ -111,12 +111,12 @@ export async function writeDataFromFileArray(
     const fileContent = await getContent(currentFile);
     let dataToWrite = "";
     if (fileContent) {
-      // 文件之间空行分隔；首个文件前不需要额外空行
+      // 首个文件前不需要额外空行
       if (index > 0) {
         dataToWrite += os.EOL;
       }
-      // 先写入相对路径行，再写入代码内容
-      dataToWrite += relativePath + os.EOL + fileContent;
+      // 先写入相对路径行，再写入代码内容，最后添加换行
+      dataToWrite += relativePath + os.EOL + fileContent + os.EOL;
     }
     if (dataToWrite && !writableStream.write(dataToWrite)) {
       writableStream.once("drain", () => {
