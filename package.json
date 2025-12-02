@@ -3,7 +3,7 @@
   "displayName": "Export-Code",
   "description": "项目代码快速提取至txt",
   "version": "1.1.0",
-  "publisher": "qcqx",
+  "publisher": "sorkai",
   "repository": {
     "type": "git",
     "url": "https://github.com/Sorkai/export-code.git"
