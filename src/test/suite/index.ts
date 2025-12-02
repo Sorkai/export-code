@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as Mocha from 'mocha';
-import * as glob from 'glob';
+import glob = require('glob');
 
 export function run(): Promise<void> {
   // Create the mocha test
@@ -11,24 +11,24 @@ export function run(): Promise<void> {
 
   const testsRoot = path.resolve(__dirname, '..');
 
-  return new Promise((c, e) => {
-    glob("**/**.test.js", { cwd: testsRoot }, (err, files) => {
+  return new Promise((resolve, reject) => {
+    glob('**/**.test.js', { cwd: testsRoot }, (err: Error | null, files: string[]) => {
       if (err) {
-        e(err);
+        reject(err);
         return;
       }
       try {
-        files.forEach((f) => mocha.addFile(path.resolve(testsRoot, f)));
-        mocha.run(failures => {
+        files.forEach((f: string) => mocha.addFile(path.resolve(testsRoot, f)));
+        mocha.run((failures: number) => {
           if (failures > 0) {
-            e(new Error(`${failures} tests failed.`));
+            reject(new Error(`${failures} tests failed.`));
           } else {
-            c();
+            resolve();
           }
         });
-      } catch (err) {
-        console.error(err);
-        e(err);
+      } catch (e) {
+        console.error(e);
+        reject(e as Error);
       }
     });
   });
