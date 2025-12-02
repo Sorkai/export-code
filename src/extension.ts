@@ -60,7 +60,7 @@ async function extractAndWriteData(
 		// if (excludeFiles.includes(path.basename(doc.fileName))) { return ''; }
 		// 删除注释和空行
 		return utils.deleteCommentsAndBlankLines(doc.getText(), doc.languageId);
-	});
+	}, rootPath);
 	// 显示输出通道
 	// outputChannel.show();
 }

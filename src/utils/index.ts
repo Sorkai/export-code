@@ -100,30 +100,32 @@ export function deleteCommentsAndBlankLines(
 // 递归写入数据的函数
 export async function writeDataFromFileArray(
   writableStream: fs.WriteStream,
-  fileArray: Array<Object>,
+  fileArray: vscode.Uri[],
   index: number,
-  getContent: (obj: Object) => Promise<string>
+  getContent: (obj: vscode.Uri) => Promise<string>,
+  rootPath: string
 ) {
   if (index < fileArray.length) {
-    // 获取当前数据
-    const currentData = await getContent(fileArray[index]);
-    // 尝试写入数据
-    if (currentData && !writableStream.write(currentData + os.EOL)) {
-      // 在 drain 事件触发后继续写入下一条数据
+    const currentFile = fileArray[index];
+    const relativePath = path.relative(rootPath, currentFile.fsPath);
+    const fileContent = await getContent(currentFile);
+    let dataToWrite = "";
+    if (fileContent) {
+      // 文件之间空行分隔；首个文件前不需要额外空行
+      if (index > 0) {
+        dataToWrite += os.EOL;
+      }
+      // 先写入相对路径行，再写入代码内容
+      dataToWrite += relativePath + os.EOL + fileContent;
+    }
+    if (dataToWrite && !writableStream.write(dataToWrite)) {
       writableStream.once("drain", () => {
-        writeDataFromFileArray(
-          writableStream,
-          fileArray,
-          index + 1,
-          getContent
-        );
+        writeDataFromFileArray(writableStream, fileArray, index + 1, getContent, rootPath);
       });
     } else {
-      // 数据已经完全写入，递归调用写入下一条数据
-      writeDataFromFileArray(writableStream, fileArray, index + 1, getContent);
+      writeDataFromFileArray(writableStream, fileArray, index + 1, getContent, rootPath);
     }
   } else {
-    // 所有数据都已写入，结束可写流
     writableStream.end();
   }
 }
