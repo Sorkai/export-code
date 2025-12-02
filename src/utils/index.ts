@@ -85,14 +85,14 @@ export function deleteCommentsAndBlankLines(
     case "xml":
     case "css":
       return content
-        .replace(commentRegex, "")
+        .replace(commentRegex, '')
         .replace(/\n\s*\n/g, "\n") // 删除多余的空行
         .trim(); // 删除开头和结尾的空行
     default:
   }
 
   return content
-    .replace(commentRegex, (match, p1) => (p1 ? p1 : ""))
+    .replace(commentRegex, (match, p1) => (p1 ? p1 : ''))
     .replace(/\n\s*\n/g, "\n") // 删除多余的空行
     .trim(); // 删除开头和结尾的空行
 }
