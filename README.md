@@ -7,7 +7,7 @@
 
 **修改自** [\https://github.com/qxchuckle/copyright-code](https://github.com/qxchuckle/copyright-code)
 
-前往插件市场下载：[https://marketplace.visualstudio.com/items?itemName=qcqx.export-code](https://marketplace.visualstudio.com/items?itemName=qcqx.export-code)
+前往插件市场下载：[https://marketplace.visualstudio.com/items?itemName=sorkai.export-code](https://marketplace.visualstudio.com/items?itemName=sorkai.export-code)
 
 ## 使用方法
 使用它也很简单，就一个命令：`Export Code`，你可以在命令面板（`Ctrl+Shift+P`）中搜索到它。
@@ -40,9 +40,9 @@ const skipDirectories = ['node_modules', /^\./, 'uni_modules'];
 ```
 
 当然，你也可以直接在插件的设置项中添加需要排除的文件夹
-![](https://github.com/qxchuckle/copyright-code/blob/main/images/skip.png)
+![](https://github.com/Sorkai/export-code/blob/main/images/skip.png)
 
-> 祝软著申请顺利，当然这多半是一两个月后的消息了。
+
 
 
 

@@ -1,6 +1,6 @@
-# Export-Code (Copyright-Code) AI 指南
+# Export-Code (Export-Code) AI 指南
 
-这是一个 VS Code 扩展，旨在将项目中的源代码提取到单个 `.txt` 文件中，并去除注释和空行。主要用于软件著作权申请。
+这是一个 VS Code 扩展，旨在将项目中的源代码提取到单个 `.txt` 文件中，并去除注释和空行。
 
 ## 架构与核心组件
 

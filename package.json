@@ -6,7 +6,7 @@
   "publisher": "qcqx",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qxchuckle/export-code.git"
+    "url": "https://github.com/Sorkai/export-code.git"
   },
   "engines": {
     "vscode": "^1.60.0"
