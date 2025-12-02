@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Cache VS Code test downloads
         uses: actions/cache@v4
@@ -36,7 +36,6 @@ jobs:
           path: ~/.vscode-test
           key: vscode-test-${{ runner.os }}-${{ matrix.vscode_version }}
 
-      # 兼容 Ubuntu 24.04（noble）：libasound2 更名为 libasound2t64
       - name: Install Xvfb and deps (Ubuntu 24.04 compatible)
         run: |
           sudo apt-get update
@@ -47,7 +46,6 @@ jobs:
             libxss1 \
             libxtst6 \
             libgbm1
-          # 尝试安装 libasound2，如失败则安装 libasound2t64（24.04）
           sudo apt-get install -y libasound2 || sudo apt-get install -y libasound2t64
 
       - name: Run integration tests (VS Code ${{ matrix.vscode_version }})
