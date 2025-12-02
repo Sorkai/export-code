@@ -92,7 +92,7 @@ export function deleteCommentsAndBlankLines(
   }
 
   return content
-    .replace(commentRegex, (match, p1) => (p1 ? p1 : ' '))
+    .replace(commentRegex, (match: string, p1?: string) => (p1 ? p1 : ' '))
     .replace(/\n\s*\n/g, "\n") // 删除多余的空行
     .trim(); // 删除开头和结尾的空行
 }
@@ -120,10 +120,10 @@ export async function writeDataFromFileArray(
     }
     if (dataToWrite && !writableStream.write(dataToWrite)) {
       writableStream.once("drain", () => {
-        writeDataFromFileArray(writableStream, fileArray, index + 1, getContent, rootPath);
+        void writeDataFromFileArray(writableStream, fileArray, index + 1, getContent, rootPath);
       });
     } else {
-      writeDataFromFileArray(writableStream, fileArray, index + 1, getContent, rootPath);
+      void writeDataFromFileArray(writableStream, fileArray, index + 1, getContent, rootPath);
     }
   } else {
     writableStream.end();
@@ -137,24 +137,22 @@ export async function getAllFileExtensions(
 ): Promise<string[]> {
   const allFileExtensions = new Set<string>();
   const files = await vscode.workspace.findFiles("**/*");
-  await Promise.all(
-    files.map(async (file) => {
-      const filePath = file.fsPath;
-      // 如果是二进制文件，跳过，如图片、视频等
-      if (isBinary(filePath)) {
-        return;
-      }
-      if (!shouldSkipDirectory(rootPath, filePath, skipDirectories)) {
-        const ext = path.extname(filePath);
-        if (ext) {
-          const fileExt = ext.slice(1);
-          if (!allFileExtensions.has(fileExt)) {
-            allFileExtensions.add(fileExt);
-          }
+  files.forEach((file) => {
+    const filePath = file.fsPath;
+    // 如果是二进制文件，跳过，如图片、视频等
+    if (isBinary(filePath)) {
+      return;
+    }
+    if (!shouldSkipDirectory(rootPath, filePath, skipDirectories)) {
+      const ext = path.extname(filePath);
+      if (ext) {
+        const fileExt = ext.slice(1);
+        if (!allFileExtensions.has(fileExt)) {
+          allFileExtensions.add(fileExt);
         }
       }
-    })
-  );
+    }
+  });
   return Array.from(allFileExtensions);
 }
 
@@ -215,14 +213,13 @@ async function directoryHasMatchingFiles(
   const fileSystemEntries = await vscode.workspace.fs.readDirectory(
     vscode.Uri.file(directoryPath)
   );
-  const promises = fileSystemEntries.map(async ([name, type]) => {
+  const results = fileSystemEntries.map(([name, type]) => {
     if (type === vscode.FileType.File) {
       const extension = path.extname(name).slice(1);
       return fileExtensions.includes(extension);
     }
     return false;
   });
-  const results = await Promise.all(promises);
   return results.some((result) => result);
 }
 
