@@ -1,6 +1,6 @@
 <div align="center">
 <!-- 名称 -->
-<h1>Copyright-Code</h1>
+<h1>Export-Code</h1>
 </div>
 
 这是一个VSCode插件，用于快速提取**去除了注释和空行**的项目代码，并输出到一个txt文件中。
@@ -10,7 +10,7 @@
 前往插件市场下载：[https://marketplace.visualstudio.com/items?itemName=qcqx.copyright-code](https://marketplace.visualstudio.com/items?itemName=qcqx.copyright-code)
 
 ## 使用方法
-使用它也很简单，就一个命令：`Extract Code`，你可以在命令面板（`Ctrl+Shift+P`）中搜索到它。
+使用它也很简单，就一个命令：`Export Code`，你可以在命令面板（`Ctrl+Shift+P`）中搜索到它。
 
 > 还有一个功能相同的中文命令：`导出代码`
 
