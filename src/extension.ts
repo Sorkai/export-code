@@ -6,11 +6,11 @@ import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
 	// 命令
-	const extractCodeCommand = vscode.commands.registerCommand('copyright-code.extractCode', async () => {
+	const extractCodeCommand = vscode.commands.registerCommand('export-code.exportCode', async () => {
 		await extractCode();
 	});
 	// 中文版命令
-	const extractCodeZHCommand = vscode.commands.registerCommand('copyright-code.extractCodeZH', async () => {
+	const extractCodeZHCommand = vscode.commands.registerCommand('export-code.exportCodeZH', async () => {
 		await extractCode();
 	});
 	// 注册命令
@@ -34,7 +34,7 @@ async function extractCode() {
 }
 
 // 创建输出通道
-const outputChannel = vscode.window.createOutputChannel('copyright-code');
+const outputChannel = vscode.window.createOutputChannel('export-code');
 
 // 提取并写入数据
 async function extractAndWriteData(
@@ -48,15 +48,15 @@ async function extractAndWriteData(
 	const outputStream = fs.createWriteStream(outputFilePath);
 	outputStream.on('finish', () => {
 		const message = `提取的项目代码已保存至: ${outputFilePath}`;
-    vscode.window.showInformationMessage(message);
-    outputChannel.appendLine(`[${getCurrentTimestamp()}] ${message}`);
+		vscode.window.showInformationMessage(message);
+		outputChannel.appendLine(`[${getCurrentTimestamp()}] ${message}`);
 	});
 	// 写入数据
 	await utils.writeDataFromFileArray(outputStream, filesToExtract, 0, async (file) => {
 		// 打开文档
 		const doc = await vscode.workspace.openTextDocument(file);
 		// 输出文件类型到输出通道
-    outputChannel.appendLine(`[${getCurrentTimestamp()}] 提取 ${doc.fileName} type: ${doc.languageId}`);
+		outputChannel.appendLine(`[${getCurrentTimestamp()}] 提取 ${doc.fileName} type: ${doc.languageId}`);
 		// if (excludeFiles.includes(path.basename(doc.fileName))) { return ''; }
 		// 删除注释和空行
 		return utils.deleteCommentsAndBlankLines(doc.getText(), doc.languageId);
@@ -67,6 +67,6 @@ async function extractAndWriteData(
 
 // 获取当前时间的字符串
 function getCurrentTimestamp(): string {
-  const now = new Date();
-  return now.toISOString();
+	const now = new Date();
+	return now.toISOString();
 }

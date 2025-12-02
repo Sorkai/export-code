@@ -7,7 +7,7 @@
 
 **修改自** [\https://github.com/qxchuckle/copyright-code](https://github.com/qxchuckle/copyright-code)
 
-前往插件市场下载：[https://marketplace.visualstudio.com/items?itemName=qcqx.copyright-code](https://marketplace.visualstudio.com/items?itemName=qcqx.copyright-code)
+前往插件市场下载：[https://marketplace.visualstudio.com/items?itemName=qcqx.export-code](https://marketplace.visualstudio.com/items?itemName=qcqx.export-code)
 
 ## 使用方法
 使用它也很简单，就一个命令：`Export Code`，你可以在命令面板（`Ctrl+Shift+P`）中搜索到它。

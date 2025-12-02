@@ -48,14 +48,14 @@ async function selectedRootPathFiles(rootPath: string, fileExtensions: string[],
 // 用户选择匹配规则并获取Pattern
 async function getPattern(rootPath: string) {
 	// 从VS插件设置中获取要排除的文件及文件夹
-	const config = vscode.workspace.getConfiguration('copyrightCode');
+	const config = vscode.workspace.getConfiguration('exportCode');
 	const skipDirectories: string[] = config.get('skipDirectories', []);
 
 	// 过滤并转换为 glob 模式
 	const stringSkipDirectories = skipDirectories
-			.filter((item: string) => typeof item === 'string')
-			.map(item => `**/${item}/**`)
-			.join(',');
+		.filter((item: string) => typeof item === 'string')
+		.map(item => `**/${item}/**`)
+		.join(',');
 
 	// 让用户选择需要提取的文件后缀名
 	const selectedExtensions = await selectFileExtensions(rootPath, skipDirectories);
