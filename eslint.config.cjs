@@ -49,9 +49,9 @@ module.exports = [
         },
         rules: {
             // 推荐规则
-            ...tsPlugin.configs.recommended.rules
+            ...tsPlugin.configs.recommended.rules,
             // 如需类型检查规则，额外启用：
-            // ...tsPlugin.configs['recommended-requiring-type-checking'].rules
+            ...tsPlugin.configs['recommended-requiring-type-checking'].rules
         }
     },
 
