@@ -30,20 +30,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 可选：避免每次都重新下载 VS Code 测试包，加速 CI
       - name: Cache VS Code test downloads
         uses: actions/cache@v4
         with:
           path: ~/.vscode-test
           key: vscode-test-${{ runner.os }}-${{ matrix.vscode_version }}
 
-      # 安装 Xvfb 及常见 Electron 依赖库，确保 VS Code 能在 CI 启动
-      - name: Install Xvfb and deps
+      # 兼容 Ubuntu 24.04（noble）：libasound2 更名为 libasound2t64
+      - name: Install Xvfb and deps (Ubuntu 24.04 compatible)
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libgtk-3-0 libnss3 libxss1 libasound2 libxtst6 libgbm1
+          sudo apt-get install -y \
+            xvfb \
+            libgtk-3-0 \
+            libnss3 \
+            libxss1 \
+            libxtst6 \
+            libgbm1
+          # 尝试安装 libasound2，如失败则安装 libasound2t64（24.04）
+          sudo apt-get install -y libasound2 || sudo apt-get install -y libasound2t64
 
-      # 使用 Xvfb 运行测试；runTest.ts 已支持从环境变量读取 VS Code 版本
       - name: Run integration tests (VS Code ${{ matrix.vscode_version }})
         env:
           VSCODE_TEST_VERSION: ${{ matrix.vscode_version }}
