@@ -1,4 +1,6 @@
 name: Extension Tests
+permissions:
+  contents: read
 
 on:
   push:
