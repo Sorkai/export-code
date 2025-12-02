@@ -1,0 +1,36 @@
+name: Extension Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        vscode_version: [ '1.60.0', 'stable' ]
+        node_version: [ '20' ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run integration tests (VS Code ${{ matrix.vscode_version }})
+        env:
+          VSCODE_TEST_VERSION: ${{ matrix.vscode_version }}
+        run: |
+          npm test
