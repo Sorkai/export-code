@@ -15,6 +15,8 @@
 - 🌍 **多语言支持**：支持 JavaScript/TypeScript、Python、Java、C/C++、HTML/CSS 等主流语言
 - ⚙️ **可配置**：支持通过设置自定义排除规则
 - 🌐 **双语命令**：提供英文和中文命令，使用更便捷
+- 🔒 **安全可靠**：通过 CodeQL 安全扫描，代码质量有保障
+- 🤖 **持续更新**：配置 Dependabot 自动依赖更新，保持最新状态
 
 ## 📖 使用方法
 
@@ -119,7 +121,7 @@ export function processFile(content: string) {
 
 ## 📜 许可证
 
-本项目基于 MIT 许可证开源。
+本项目基于 Apache-2.0 许可证开源。
 
 ## 🙏 致谢
 
