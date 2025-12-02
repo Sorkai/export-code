@@ -89,7 +89,7 @@
     "@types/glob": "^7.2.0",
     "@types/minimatch": "^3.0.5",
     "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
+    "@types/node": "24.x",
     "@types/vscode": "^1.106.1",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
