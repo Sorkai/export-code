@@ -1,0 +1,41 @@
+version: 2
+updates:
+  # NPM 依赖更新
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"        # 每周检查一次
+      day: "monday"             # 周一检查
+      time: "09:00"             # 北京时间需要 +8
+      timezone: "Asia/Shanghai"
+    open-pull-requests-limit: 5  # 最多同时打开 5 个 PR
+    reviewers:
+      - "Sorkai"                 # 自动指定审查者（你的 GitHub 用户名）
+    assignees:
+      - "Sorkai"                 # 自动指定处理人
+    commit-message:
+      prefix: "chore"            # commit 前缀
+      prefix-development: "chore"
+      include: "scope"           # 包含作用域
+    labels:
+      - "dependencies"           # 自动添加标签
+      - "npm"
+    # 版本更新策略
+    versioning-strategy: increase  # 总是增加版本号
+    
+  # GitHub Actions 工作流依赖更新
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "Sorkai"
+    commit-message:
+      prefix: "ci"
+    labels:
+      - "dependencies"
+      - "github-actions"
