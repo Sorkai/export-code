@@ -59,3 +59,7 @@ jobs:
         run: npm run deploy
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to Open VSX Registry
+        if: success()
+        run: npx ovsx publish *.vsix -p ${{ secrets.OVSX_PAT }}
