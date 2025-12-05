@@ -2,7 +2,7 @@
   "name": "export-code",
   "displayName": "Export-Code",
   "description": "项目代码快速提取至txt",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "sorkai",
   "keywords": [
     "export",
