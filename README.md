@@ -6,6 +6,12 @@
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/sorkai.export-code?color=success&label=Installs)](https://marketplace.visualstudio.com/items?itemName=sorkai.export-code)
 [![Rating](https://img.shields.io/visual-studio-marketplace/r/sorkai.export-code?color=orange&label=Rating)](https://marketplace.visualstudio.com/items?itemName=sorkai.export-code)
 
+## 📦 安装
+
+- VS Code / VS Code Insiders: [Marketplace](https://marketplace.visualstudio.com/items?itemName=sorkai.export-code)
+- VSCodium / Code OSS / Open VSX 客户端: [Open VSX](https://open-vsx.org/extension/sorkai/export-code)
+- 兼容性: 支持 VS Code **1.80.0+**
+
 ## ✨ 特性
 
 - 🚀 **一键导出**：快速将项目代码导出到单个文本文件

@@ -2,6 +2,16 @@
 
 本文档记录了 Export-Code 扩展的所有重要变更。
 
+## [1.2.1] - 2025-12-05
+
+### Changed
+- 🚀 **双通道发布**: Release 工作流增加发布到 Open VSX Registry，支持 VS Code / VSCodium / Cursor 等兼容商店。
+- 🛡️ **发布前强制校验**: 发布时先运行 lint + compile + test，任何一步失败会阻断发布。
+
+### Security / Dependencies
+- 📦 升级 `jws` 依赖（安全更新）。
+- 🤖 Dependabot 汇总依赖更新。
+
 ## [1.2.0] - 2025-12-03
 
 ### 🚀 重大更新 (Major Release)

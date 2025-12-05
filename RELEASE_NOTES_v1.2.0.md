@@ -1,6 +1,26 @@
-# Export-Code v1.2.0 发布说明
+# Export-Code v1.2.1 发布说明
 
-发布日期：2025年12月3日
+发布日期：2025年12月5日
+
+---
+
+## 🆕 v1.2.1 更新摘要
+
+### 1) 双通道发布
+- Release 工作流新增发布到 **Open VSX Registry**（VSCodium / Code OSS / Cursor 等）。
+- 需要配置 `OVSX_PAT`，与 `VSCE_PAT` 一起完成双渠道发布。
+
+### 2) 发布前强制校验
+- 发布前依次运行 `npm run lint` → `npm run compile` → `npm test`。
+- 任一失败会阻断打包和发布，确保质量。
+
+### 3) 依赖 / 安全
+- 升级 `jws`（安全更新）。
+- 合并 Dependabot 依赖升级。
+
+---
+
+以下内容保留 v1.2.0 的完整更新说明，便于回溯：
 
 ---
 
